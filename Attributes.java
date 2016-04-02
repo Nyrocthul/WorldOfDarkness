@@ -1,11 +1,13 @@
+import org.jetbrains.annotations.NotNull;
+
 public class Attributes {
-  Attribute intelligence = new Attribute("Intelligence");
-  Attribute wits = new Attribute("Wits");
-  Attribute resolve = new Attribute("Resolve");
-  Attribute strength = new Attribute("Strength");
-  Attribute dexterity = new Attribute("Dexterity");
-  Attribute stamina = new Attribute("Stamina");
-  Attribute presence = new Attribute("Presence");
-  Attribute manipulation = new Attribute("Manipulation");
-  Attribute composure = new Attribute("Composure");
+  @NotNull Attribute intelligence = new Attribute("Intelligence");
+  @NotNull Attribute wits = new Attribute("Wits");
+  @NotNull Attribute resolve = new Attribute("Resolve");
+  @NotNull Attribute strength = new Attribute("Strength");
+  @NotNull Attribute dexterity = new Attribute("Dexterity");
+  @NotNull Attribute stamina = new Attribute("Stamina");
+  @NotNull Attribute presence = new Attribute("Presence");
+  @NotNull Attribute manipulation = new Attribute("Manipulation");
+  @NotNull Attribute composure = new Attribute("Composure");
 }

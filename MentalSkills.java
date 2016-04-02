@@ -1,10 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 public class MentalSkills {
-  Skill academics = new Skill("Academics");
-  Skill computer = new Skill("Computer");
-  Skill crafts = new Skill("Crafts");
-  Skill investigation = new Skill("Investigation");
-  Skill medicine = new Skill("Medicine");
-  Skill occult = new Skill("Occult");
-  Skill politics = new Skill("Politics");
-  Skill science = new Skill("Science");
+  @NotNull Skill academics = new Skill("Academics");
+  @NotNull Skill computer = new Skill("Computer");
+  @NotNull Skill crafts = new Skill("Crafts");
+  @NotNull Skill investigation = new Skill("Investigation");
+  @NotNull Skill medicine = new Skill("Medicine");
+  @NotNull Skill occult = new Skill("Occult");
+  @NotNull Skill politics = new Skill("Politics");
+  @NotNull Skill science = new Skill("Science");
 }

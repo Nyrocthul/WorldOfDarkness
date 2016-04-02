@@ -1,10 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 public class SocialSkills {
-  Skill animalKen = new Skill("Animal Ken");
-  Skill empathy = new Skill("Empathy");
-  Skill expression = new Skill("Expression");
-  Skill intimidation = new Skill("Intimidation");
-  Skill persuasion = new Skill("Persuasion");
-  Skill socialize = new Skill("Socialize");
-  Skill streetwise = new Skill("Streetwise");
-  Skill subterfuge = new Skill("Subterfuge");
+  @NotNull Skill animalKen = new Skill("Animal Ken");
+  @NotNull Skill empathy = new Skill("Empathy");
+  @NotNull Skill expression = new Skill("Expression");
+  @NotNull Skill intimidation = new Skill("Intimidation");
+  @NotNull Skill persuasion = new Skill("Persuasion");
+  @NotNull Skill socialize = new Skill("Socialize");
+  @NotNull Skill streetwise = new Skill("Streetwise");
+  @NotNull Skill subterfuge = new Skill("Subterfuge");
 }

@@ -1,10 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 public class PhysicalSkills {
-  Skill athletics = new Skill("Athletics");
-  Skill brawl = new Skill("Brawl");
-  Skill drive = new Skill("Drive");
-  Skill firearms = new Skill("Firearms");
-  Skill larceny = new Skill("Larceny");
-  Skill stealth = new Skill("Stealth");
-  Skill survival = new Skill("Survival");
-  Skill weaponry = new Skill("Weaponry");
+  @NotNull Skill athletics = new Skill("Athletics");
+  @NotNull Skill brawl = new Skill("Brawl");
+  @NotNull Skill drive = new Skill("Drive");
+  @NotNull Skill firearms = new Skill("Firearms");
+  @NotNull Skill larceny = new Skill("Larceny");
+  @NotNull Skill stealth = new Skill("Stealth");
+  @NotNull Skill survival = new Skill("Survival");
+  @NotNull Skill weaponry = new Skill("Weaponry");
 }

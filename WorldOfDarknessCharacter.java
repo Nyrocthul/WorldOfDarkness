@@ -1,4 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
+import java.sql.*;
+
 
 public class WorldOfDarknessCharacter {
   String firstName;
@@ -7,19 +15,55 @@ public class WorldOfDarknessCharacter {
     this.firstName = _firstName;
     this.lastName = _lastName;
   }
-  Attributes attributes = new Attributes();
-  MentalSkills mentalSkills = new MentalSkills();
-  PhysicalSkills physicalSkills = new PhysicalSkills();
-  SocialSkills socialSkills = new SocialSkills();
-  Integer size = 5;
-  Integer hitBoxes = size + attributes.stamina.dots;
+  public static WorldOfDarknessCharacter callDataBase(String lname) {
+    Connection connection = null;
+    ResultSet resultSet = null;
+    PreparedStatement statement = null;
+
+    try {
+      Class.forName("org.sqlite.JDBC");
+      connection = DriverManager.getConnection("jdbc:sqlite:worldofdarkness/characters.db");
+      statement = connection.prepareStatement("select * from characters where lname = ?");
+      statement.setString(1, lname);
+      resultSet = statement
+              .executeQuery();
+      String fname = null;
+      try {
+        fname = resultSet.getString("fname");
+        lname = resultSet.getString("lname");
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      while (resultSet.next()) {
+        return new WorldOfDarknessCharacter(fname, lname);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        resultSet.close();
+        statement.close();
+        connection.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    return null;
+  }
+  
+  @NotNull Attributes attributes = new Attributes();
+  @NotNull MentalSkills mentalSkills = new MentalSkills();
+  @NotNull PhysicalSkills physicalSkills = new PhysicalSkills();
+  @NotNull SocialSkills socialSkills = new SocialSkills();
+  @NotNull Integer size = 5;
+  @NotNull Integer hitBoxes = size + attributes.stamina.dots;
   Integer bashingTaken;
   Integer lethalTaken;
   Integer agTaken;
   String firstAsperation;
   String secondAsperation;
   String thirdAsperation;
-  List<Party> parties = new ArrayList<Party>();
+  @NotNull List<Party> parties = new ArrayList<Party>();
   public void joinParty(Party party){
     parties.add(party);
   }
