@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-      <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-      <script src="https://code.jquery.com/jquery-2.2.2.min.js"
-			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
-			  crossorigin="anonymous"></script>
+<html ng-app="werewolf">
+<head >
+  <meta charset="UTF-8">
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.2.min.js"
+	  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+	  crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script type="text/javascript" src="js/werewolf.js"></script>
+    <link rel="stylesheet" href="css/werewolf.css">
 </head>
 
 <body>
   <h1>My App</h1>
-  <form>
-    <input type="text" placeholder="Character Name" name="char-name">
-    <input type="text" placeholder="Auspice" name="auspice">
-    <input type="number" placeholder="Primal Urge" name="primal-urge">
-    <input type="text" placeholder="Tribe" name="tribe">
+  <div ng-controller="WerewolfCtrl">
+    <ul>
+      <li ng-repeat="roll in playerRolls">
+        <div class="button" ng-click="updateRoll(roll)">
+          <h3>Character Name: {{roll.name}}</h3>
+          Roll Size: {{roll.size}}<br />
+          Agains: {{roll.agains}}<br />
+          Is it Rote: {{roll.isRote}}<br />
+        </div>
+      </li>
+    </ul>
+  <form class="form-horizontal">
+    <input type="text" placeholder="Character Name" ng-model="charName">
+    <input type="number" placeholder="Size" ng-model="charSize">
+    <input type="number" placeholder="Agains" min="8" max="10" ng-model="charAgains">
+    <input type="checkbox" ng-model="charRote" id="rote-action-input">
+    <label for="rote-action-input">Hey there stranger</label>
+    <button class="btn" ng-click="addDiceBag()">Make Character</button>
   </form>
+  <div class="window-pane">
+    <h4>You scored {{dieRolls.hits}} hits!!</h4>
+    Your dice results were:<br />
+    {{dieRolls.poolInitial}}
+  </div>
+</div>
 
 
 
