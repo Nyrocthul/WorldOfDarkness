@@ -7,6 +7,7 @@
 	  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
 	  crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script type="text/javascript" src="js/werewolf.js"></script>
     <link rel="stylesheet" href="css/werewolf.css">
 </head>
@@ -32,11 +33,11 @@
     <label for="rote-action-input">Hey there stranger</label>
     <button class="btn" ng-click="addDiceBag()">Make Character</button>
   </form>
-  <div class="window-pane">
-    <h4>You scored {{dieRolls.hits}} hits!!</h4>
-    Your dice results were:<br />
-    {{dieRolls.poolInitial}}
-  </div>
+  <ul>
+    <li ng-repeat="roll in dieRolls" ng-click="remove($index)">
+      {{roll.hits}}
+    </li>
+  </ul>
 </div>
 
 

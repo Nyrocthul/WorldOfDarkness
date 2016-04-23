@@ -1,27 +1,41 @@
-var app = angular.module("werewolf", []).controller("WerewolfCtrl", function ($scope){
-  $scope.playerRolls = [new DieRoll("steve", 5,8,false), new DieRoll("bob", 32,8,true), new DieRoll("alice", 10,10,true)];
-  $scope.dieRolls = {
-    hits: 0,
-    poolInitial: [],
-    poolFromRote: [],
-    hitsFromRote: 0,
-    poolFromAgains: [],
-    hitsFromAgains: 0
-  };
+var app = angular.module("werewolf", ["firebase"]);
+
+app.factory("characters", ["$firebaseArray",
+    function($firebaseArray){
+      var ref = new Firebase("https://world-of-darkness.firebaseio.com/characters");
+      return $firebaseArray(ref);
+    }
+]);
+
+app.factory("results", ["$firebaseArray",
+    function($firebaseArray){
+      var ref = new Firebase("https://world-of-darkness.firebaseio.com/results");
+      return $firebaseArray(ref);
+    }
+]);
+
+app.controller("WerewolfCtrl", ["$scope", "characters", "results", function ($scope, characters, results){
+  $scope.playerRolls = characters;
+  $scope.dieRolls = results;
+  $scope.remove = function(index){
+    $scope.dieRolls.$remove(index,1);
+  }
   $scope.updateRoll = function(roll){
-    $scope.dieRolls = roll.roll();
+    roll = new DieRoll(roll.name, roll.size, roll.agains, roll.isRote);
+    $scope.dieRolls.$add(roll.roll());
   }
   $scope.addDiceBag = function() {
     var charName = $scope.charName;
     var charSize = $scope.charSize;
     var charAgains = $scope.charAgains;
     var charRote = $scope.charRote;
-    $scope.playerRolls.push(new DieRoll(charName, charSize, charAgains, charRote));
+    $scope.playerRolls.$add(new DieRoll(charName, charSize, charAgains, charRote));
     console.log($scope.playerRolls);
   }
-});
+}]);
 
 var DieRoll = function(name, size, agains, isRote) {
+  isRote = isRote || false;
   this.name = name;
   this.size = size;
   this.agains = agains;
